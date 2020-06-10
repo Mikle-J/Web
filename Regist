@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>注册界面</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+		div{
+			text-align:center;
+		}
+	</style>
+  </head>
+  
+  <body>
+  	<div>
+  		<h2>注册界面</h2>
+  	</div>
+  	<div>
+    <form action="RegistCheck.jsp" method="post" onsubmit="return check();">
+    	<p>昵名: <input type="text" name="uname" maxlength="12" id="uname" /></p>
+  		<p>密码: <input type="text" name="upass" maxlength="16" id="upass" /></p>
+  		<input type="submit" value="注册" />
+    </form>
+    <form action="LoadPage.jsp" method="post">
+    	<input type="submit" value="返回" /> 
+    </form>
+    </div>
+    
+    <script type="text/javascript">
+
+function check() {
+	var uname = document.getElementById("uname").value;
+	var upass = document.getElementById("upass").value;
+	if(uname == "") {
+		alert("账号不能为空!");
+		return false;
+	} else if(upass == "") {
+		alert("密码不能为空!");
+		return false;
+	} 
+	return true;
+}
+
+</script>
+  </body>
+</html>
