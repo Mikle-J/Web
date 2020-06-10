@@ -1,0 +1,66 @@
+package Check;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class masscheck {
+	String uname = null;
+	String upass = null;
+	String sql1 = null;
+	String sql2 = null;
+	String sql3 = null;
+	ResultSet rs1 = null;
+	ResultSet rs2 = null;
+	DbProcess db = new DbProcess();
+	
+	public void getUser(String uname,String upass){
+		this.uname=uname;
+		this.upass=upass;
+	}
+	
+	public Boolean judge() {
+		db.connect();
+		sql1 = "select upass from user_form where uname = '"+uname+"';";
+		rs1 = db.executeQuery(sql1);
+		try {
+			rs1.next();
+			if(rs1.getString("upass").equals(upass)) {
+				db.disconnect();
+				return true;
+			}
+			else{
+				db.disconnect();
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			db.disconnect();
+			return false;
+
+		}
+	}
+	
+	public Boolean judge1(){
+		db.connect();
+		sql1 = "select uname from user_form where uname = '"+uname+"';";
+		rs1 = db.executeQuery(sql1);
+		try {
+			if(rs1.next()) {
+				db.disconnect();
+				return false;
+			}
+			else{
+				sql2 = "insert into user_form values('"+uname+"','"+upass+"');";
+				db.executeUpdate(sql2);
+				db.disconnect();
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			db.disconnect();
+			return false;
+
+		}
+	}
+	
+}
